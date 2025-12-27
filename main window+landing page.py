@@ -1,11 +1,19 @@
 import sys
+
+from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtWidgets import (
-    QApplication, QMainWindow, QWidget,
-    QVBoxLayout, QHBoxLayout, QStackedWidget,
-    QTextBrowser, QPlainTextEdit,
-    QPushButton, QFileDialog, QLabel
+    QApplication,
+    QFileDialog,
+    QHBoxLayout,
+    QLabel,
+    QMainWindow,
+    QPlainTextEdit,
+    QPushButton,
+    QStackedWidget,
+    QTextBrowser,
+    QVBoxLayout,
+    QWidget,
 )
-from PyQt5.QtCore import QUrl, Qt
 
 LIGHT_QSS = """
 QWidget {
@@ -60,10 +68,12 @@ QPushButton:hover {
     background-color: #3a3a3a;
 }
 """
+
+
 class IngredientCopilot(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Ingredient Co-Pilot")
+        self.setWindowTitle("NutriCoach")
         self.resize(900, 650)
 
         self.current_theme = "light"
@@ -71,15 +81,15 @@ class IngredientCopilot(QMainWindow):
         self.all_suggestions = [
             "Is this safe for kids?",
             "What should I be cautious about?",
-            "Is there a healthier alternative"
+            "Is there a healthier alternative",
         ]
         self.remaining_suggestions = self.all_suggestions.copy()
         self.stack = QStackedWidget()
         self.setCentralWidget(self.stack)
         self.landing_page = self.build_landing_page()
         self.copilot_page = self.build_copilot_page()
-        self.stack.addWidget(self.landing_page)   # index 0
-        self.stack.addWidget(self.copilot_page)   # index 1
+        self.stack.addWidget(self.landing_page)  # index 0
+        self.stack.addWidget(self.copilot_page)  # index 1
         self.set_theme("light")
 
     def build_landing_page(self):
@@ -154,7 +164,6 @@ class IngredientCopilot(QMainWindow):
 
         return page
 
-
     def toggle_theme(self):
         self.current_theme = "dark" if self.current_theme == "light" else "light"
         self.set_theme(self.current_theme)
@@ -162,13 +171,12 @@ class IngredientCopilot(QMainWindow):
     def set_theme(self, mode):
         self.setStyleSheet(DARK_QSS if mode == "dark" else LIGHT_QSS)
 
-
     def attach_file(self):
         file_path, _ = QFileDialog.getOpenFileName(
             self,
             "Attach nutrient label",
             "",
-            "Images (*.png *.jpg *.jpeg);;PDF (*.pdf)"
+            "Images (*.png *.jpg *.jpeg);;PDF (*.pdf)",
         )
         if file_path:
             self.chat.append(f"📎 <i>Attached:</i> {file_path}")
@@ -184,7 +192,6 @@ class IngredientCopilot(QMainWindow):
         self.input_box.clear()
         self.chat.append(self.generate_ai_response())
 
-
     def handle_link_click(self, url: QUrl):
         question = url.toString()
         if question in self.remaining_suggestions:
@@ -192,7 +199,6 @@ class IngredientCopilot(QMainWindow):
 
         self.chat.append(f"<b>You:</b> {question}")
         self.chat.append(self.generate_ai_response())
-
 
     def render_suggestion_links(self):
         if not self.remaining_suggestions:
@@ -232,6 +238,7 @@ Terms like <i>“natural flavors”</i> are vague and not fully disclosed.<br><b
 
 <hr>
 """
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
