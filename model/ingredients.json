@@ -1,0 +1,366 @@
+[
+    {
+        "name": "Added Sugar",
+        "category": "Sweetener",
+        "processing_signal": "High",
+        "health_concern_type": [
+            "Blood sugar regulation",
+            "Overconsumption risk"
+        ],
+        "evidence_strength": "Strong",
+        "context_notes": "Risk increases with frequent and high intake",
+        "typical_role": "Enhances sweetness and balances acidic/bitter flavours",
+        "consumer_relevance": "Common concern in packaged foods due to frequent intake patterns"
+    },
+    {
+        "name": "High Fructose Corn Syrup",
+        "category": "Sweetener",
+        "processing_signal": "High",
+        "health_concern_type": [
+            "Blood sugar regulation",
+            "Overconsumption risk"
+        ],
+        "evidence_strength": "Strong",
+        "context_notes": "Risk increases with frequent and high intake",
+        "typical_role": "Provides sweetness in liquid and processed foods",
+        "consumer_relevance": "Often highlighted as a marker of highly processed foods"
+    },
+    {
+        "name": "Glucose Syrup",
+        "category": "Sweetener",
+        "processing_signal": "High",
+        "health_concern_type": ["Blood sugar regulation"],
+        "evidence_strength": "Strong",
+        "context_notes": "Risk increases with frequent and high intake",
+        "typical_role": "Adds sweetness and improves texture in processed foods",
+        "consumer_relevance": "Contributes to rapid sugar intake in processed products"
+    },
+    {
+        "name": "Aspartame",
+        "category": " Artificial Sweetener",
+        "processing_signal": "High",
+        "health_concern_type": [
+            "Appetite regulation",
+            "Additive exposure (cumulative)"
+        ],
+        "evidence_strength": "Mixed",
+        "context_notes": "Generally considered safe with recommended limits; concerns are more related to frequent and high intake",
+        "typical_role": "Adds sweetness with little to no calories",
+        "consumer_relevance": "Commonly found in diet and low-calorie products"
+    },
+    {
+        "name": "Sucralose",
+        "category": "Artificial Sweetener",
+        "processing_signal": "High",
+        "health_concern_type": [
+            "Appetite regulation",
+            "Additive exposure (cumulative)"
+        ],
+        "evidence_strength": "Mixed",
+        "context_notes": "Generally safe with recommended limits; concerns are more related to frequent intake",
+        "typical_role": "Provides sweetness without added calories",
+        "consumer_relevance": "Used in sugar-free and low-calorie products"
+    },
+    {
+        "name": "Palm Oil",
+        "category": "Vegetable Oil",
+        "processing_signal": "Medium",
+        "health_concern_type": [
+            "Fat quality concerns",
+            "Ultra-processed food exposure"
+        ],
+        "evidence_strength": "Moderate",
+        "context_notes": "Health impact depends on overall diet and frequency of consumption",
+        "typical_role": "Provides stability, texture, and longer shelf life in processed foods",
+        "consumer_relevance": "Often used in processed products and associated with higher saturated fat content"
+    },
+    {
+        "name": "Soybean Oil",
+        "category": "Vegetable Oil",
+        "processing_signal": "Medium",
+        "health_concern_type": ["Fat quality concerns"],
+        "evidence_strength": "Moderate",
+        "context_notes": "Health impact depends on overall dietary fat balance and frequency of consumption",
+        "typical_role": "Used as a cooking and processing oil because of its neutral taste",
+        "consumer_relevance": "Common source of dietary fat in packaged and fried foods"
+    },
+    {
+        "name": "Sunflower Oil",
+        "category": "Vegetable Oil",
+        "processing_signal": "Medium",
+        "health_concern_type": ["Fat quality concerns"],
+        "evidence_strength": "Moderate",
+        "context_notes": "Health impact depends on type of sunflower oil and overall dietary fat balance",
+        "typical_role": "Used as a cooking, frying, and food processing due to its neutral taste and high heat tolerance",
+        "consumer_relevance": "Most commonly used oil in processed and fried foods"
+    },
+    {
+        "name": "Butter",
+        "category": "Dairy Fat",
+        "processing_signal": "Low",
+        "health_concern_type": ["Fat quality concerns"],
+        "evidence_strength": "Moderate",
+        "context_notes": "Health relevance depends on portion size; occasional use differs from frequent intake",
+        "typical_role": "Adds flavor and richness to foods",
+        "consumer_relevance": "Natural fat source commonly used for taste and cooking"
+    },
+    {
+        "name": "Hydrogenated Oil",
+        "category": "Processed Fat",
+        "processing_signal": "High",
+        "health_concern_type": [
+            "Fat quality concerns",
+            "Ultra-processed food exposure"
+        ],
+        "evidence_strength": "Strong",
+        "context_notes": "Concerns are higher with frequent consumption due to its high processing methods and fat composion",
+        "typical_role": "Improves shelf life and texture in foods",
+        "consumer_relevance": "Often used in highly processed foods as a stability and cost-effective fat source"
+    },
+    {
+        "name": "Refined Wheat Flour (Maida)",
+        "category": "Refined Grain",
+        "processing_signal": "High",
+        "health_concern_type": [
+            "Blood sugar regulation",
+            "Low nutritional value"
+        ],
+        "evidence_strength": "Strong",
+        "context_notes": "Frequent consumption may displace whole grains and fibers; effects depend on portion size and dietary balance",
+        "typical_role": "Provides soft texture and structure in baked goods",
+        "consumer_relevance": "Common base ingredient in many refined and processed foods"
+    },
+    {
+        "name": "Corn Starch",
+        "category": "Starch",
+        "processing_signal": "Medium",
+        "health_concern_type": ["Blood sugar regulation"],
+        "evidence_strength": "Moderate",
+        "context_notes": "Quickly digestable carbohydrate; impact depends on quantity",
+        "typical_role": "Thickens sauces and improves texture",
+        "consumer_relevance": "Adds carbohydrates without significant nutitional value"
+    },
+    {
+        "name": "Rice Flour",
+        "category": "Flour",
+        "processing_signal": "Medium",
+        "health_concern_type": ["Blood sugar regulation"],
+        "evidence_strength": "Moderate",
+        "context_notes": "Effects depend on refinement level and overall dietary pattern",
+        "typical_role": "Used for structure and texture in baked and gluten-free foods",
+        "consumer_relevance": "Common alternative to flour in processed and gluten-free products"
+    },
+    {
+        "name": "Tapioca Starch",
+        "category": "Starch",
+        "processing_signal": "Medium",
+        "health_concern_type": ["Blood sugar regulation"],
+        "evidence_strength": "Moderate",
+        "context_notes": "Primarily a refined carbohydrate; relevance increases with frequent consumption",
+        "typical_role": "Improves chewiness and thickens food products",
+        "consumer_relevance": "Used to modify texture in processed foods with minimal nutitional value"
+    },
+
+    {
+        "name": "Emulsifier (E471)",
+        "category": "Emulsifier",
+        "processing_signal": "Medium",
+        "health_concern_type": [
+            "Gut health (emerging)",
+            "Ultra-processed food exposure"
+        ],
+        "evidence_strength": "Mixed",
+        "context_notes": "Concerns mainly relate to frequent intake of highly processed foods rather than occasional use",
+        "typical_role": "Helps blend fats and water and improves texture",
+        "consumer_relevance": "Signals a higher level of food processing"
+    },
+    {
+        "name": "Emulsifier (E472)",
+        "category": "Emulsifier",
+        "processing_signal": "Medium",
+        "health_concern_type": [
+            "Gut health (emerging)",
+            "Ultra-processed food exposure"
+        ],
+        "evidence_strength": "Mixed",
+        "context_notes": "Generally considered safe in small amounts; relevance increases with frequent consumption of processed foods",
+        "typical_role": "Improves stability and consistency of processed foods",
+        "consumer_relevance": "Often used as a marker of processed food formulation"
+    },
+    {
+        "name": "Stabilizer",
+        "category": "Processing Additive",
+        "processing_signal": "Medium",
+        "health_concern_type": ["Additive exposure (cumulative)"],
+        "evidence_strength": "Limited",
+        "context_notes": "Health relevance is mainly linked to cumulative exposure from multiple processed foods",
+        "typical_role": "Maintains texture and prevents separation",
+        "consumer_relevance": "Indicates formulation designed for shelf stability"
+    },
+    {
+        "name": "Thickener",
+        "category": "Processing Additive",
+        "processing_signal": "Medium",
+        "health_concern_type": ["Additive exposure (cumulative)"],
+        "evidence_strength": "Limited",
+        "context_notes": "Typically safe in small amounts; relevance increases with frequent consumption of processed foods",
+        "typical_role": "Increases viscosity and improves mouthfeel",
+        "consumer_relevance": "Used to modify texture rather than add nutrition"
+    },
+    {
+        "name": "Preservative",
+        "category": "Processing Additive",
+        "processing_signal": "High",
+        "health_concern_type": ["Additive exposure (cumulative)"],
+        "evidence_strength": "Moderate",
+        "context_notes": "Generally safe within regulated limits; cumulative intake is more relevant than single exposure",
+        "typical_role": "Extends shelf life by preventing spoilage",
+        "consumer_relevance": "Common in packaged foods designed for long storage"
+    },
+    {
+        "name": "Antioxidant",
+        "category": "Processing Additive",
+        "processing_signal": "Medium",
+        "health_concern_type": ["Additive exposure (cumulative)"],
+        "evidence_strength": "Moderate",
+        "context_notes": "Used to prevent oxidation; health relevance depends on type and frequency of intake",
+        "typical_role": "Prevents rancidity and preserves freshness",
+        "consumer_relevance": "Supports shelf life rather than nutritional value"
+    },
+    {
+        "name": "Anti-caking Agent",
+        "category": "Processing Additive",
+        "processing_signal": "Medium",
+        "health_concern_type": ["Additive exposure (cumulative)"],
+        "evidence_strength": "Limited",
+        "context_notes": "Typically used in very small amounts; relevance mainly relates to frequent processed food intake",
+        "typical_role": "Prevents clumping and improves flow of powdered ingredients",
+        "consumer_relevance": "Functional ingredient indicating processed formulation"
+    },
+    {
+        "name": "Artificial Flavor",
+        "category": "Flavoring",
+        "processing_signal": "High",
+        "health_concern_type": [
+            "Low nutritional value",
+            "Ultra-processed food exposure"
+        ],
+        "evidence_strength": "Moderate",
+        "context_notes": "Generally used in small amounts; relevance increases with frequent intake of highly processed foods",
+        "typical_role": "Adds or enhances flavor without contributing nutrition",
+        "consumer_relevance": "Signals heavy flavor engineering in processed foods"
+    },
+    {
+        "name": "Natural Flavor",
+        "category": "Flavoring",
+        "processing_signal": "Medium",
+        "health_concern_type": ["Ultra-processed food exposure"],
+        "evidence_strength": "Limited",
+        "context_notes": "Derived from natural sources but still processed; impact depends on overall diet quality",
+        "typical_role": "Enhances flavor using extracts from natural sources",
+        "consumer_relevance": "Often perceived as healthier but still indicates processing"
+    },
+    {
+        "name": "Flavor Enhancer (MSG / E621)",
+        "category": "Flavor Enhancer",
+        "processing_signal": "Medium",
+        "health_concern_type": [
+            "Appetite regulation",
+            "Additive exposure (cumulative)"
+        ],
+        "evidence_strength": "Mixed",
+        "context_notes": "Generally considered safe; some individuals report sensitivity, especially with frequent intake",
+        "typical_role": "Enhances savory taste and palatability",
+        "consumer_relevance": "Common in savory processed foods to increase taste appeal"
+    },
+    {
+        "name": "Yeast Extract",
+        "category": "Flavor Enhancer",
+        "processing_signal": "Medium",
+        "health_concern_type": ["Appetite regulation"],
+        "evidence_strength": "Limited",
+        "context_notes": "Used for savory flavor; relevance depends on frequency and quantity consumed",
+        "typical_role": "Provides umami flavor naturally",
+        "consumer_relevance": "Often used as an alternative to added flavor enhancers"
+    },
+    {
+        "name": "Artificial Color",
+        "category": "Coloring",
+        "processing_signal": "High",
+        "health_concern_type": ["Additive exposure (cumulative)"],
+        "evidence_strength": "Mixed",
+        "context_notes": "Generally safe within limits; concerns relate to frequent intake from multiple sources",
+        "typical_role": "Improves or standardizes product appearance",
+        "consumer_relevance": "Purely aesthetic ingredient indicating high processing"
+    },
+    {
+        "name": "Food Coloring",
+        "category": "Coloring",
+        "processing_signal": "Medium",
+        "health_concern_type": ["Additive exposure (cumulative)"],
+        "evidence_strength": "Limited",
+        "context_notes": "Health relevance mainly relates to cumulative exposure over time",
+        "typical_role": "Adds or restores color to food products",
+        "consumer_relevance": "Used for visual appeal rather than nutrition"
+    },
+    {
+        "name": "Salt",
+        "category": "Seasoning",
+        "processing_signal": "Low",
+        "health_concern_type": ["Sodium intake concern"],
+        "evidence_strength": "Strong",
+        "context_notes": "Health relevance depends on total daily intake across foods",
+        "typical_role": "Enhances flavor and acts as a preservative",
+        "consumer_relevance": "Major contributor to sodium intake in packaged foods"
+    },
+    {
+        "name": "Citric Acid",
+        "category": "Acidity Regulator",
+        "processing_signal": "Low",
+        "health_concern_type": ["Digestive comfort (context-dependent)"],
+        "evidence_strength": "Limited",
+        "context_notes": "Generally safe; may cause discomfort for sensitive individuals in large amounts",
+        "typical_role": "Provides acidity and flavor balance",
+        "consumer_relevance": "Common additive for taste and preservation"
+    },
+    {
+        "name": "Milk Solids",
+        "category": "Dairy Component",
+        "processing_signal": "Medium",
+        "health_concern_type": ["Common food sensitivities"],
+        "evidence_strength": "Strong",
+        "context_notes": "Relevance mainly applies to individuals sensitive to dairy components",
+        "typical_role": "Adds creaminess and dairy flavor",
+        "consumer_relevance": "Important for people monitoring dairy intake"
+    },
+    {
+        "name": "Cocoa Powder",
+        "category": "Plant Ingredient",
+        "processing_signal": "Low",
+        "health_concern_type": ["Stimulant sensitivity (context-dependent)"],
+        "evidence_strength": "Limited",
+        "context_notes": "Contains naturally occurring stimulants; relevance depends on portion size",
+        "typical_role": "Provides chocolate flavor and color",
+        "consumer_relevance": "Contributes flavor rather than significant nutrition in processed foods"
+    },
+    {
+        "name": "Raising Agent",
+        "category": "Leavening Agent",
+        "processing_signal": "Medium",
+        "health_concern_type": ["Additive exposure (cumulative)"],
+        "evidence_strength": "Limited",
+        "context_notes": "Used in small quantities; relevance mainly tied to processed food intake frequency",
+        "typical_role": "Helps baked goods rise and improve texture",
+        "consumer_relevance": "Functional ingredient indicating baked or processed formulation"
+    },
+    {
+        "name": "Baking Soda",
+        "category": "Leavening Agent",
+        "processing_signal": "Low",
+        "health_concern_type": ["Sodium intake concern"],
+        "evidence_strength": "Strong",
+        "context_notes": "Contributes to sodium intake when used frequently in baked foods",
+        "typical_role": "Acts as a leavening agent in baking",
+        "consumer_relevance": "Hidden source of sodium in baked products"
+    }
+]
