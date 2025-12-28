@@ -1,4 +1,5 @@
 import sys
+import requests
 
 from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtWidgets import (
@@ -186,11 +187,39 @@ class IngredientCopilot(QMainWindow):
         if not text:
             return
 
-        self.remaining_suggestions = self.all_suggestions.copy()
+       # self.remaining_suggestions = self.all_suggestions.copy()
 
         self.chat.append(f"<b>You:</b> {text}")
         self.input_box.clear()
-        self.chat.append(self.generate_ai_response())
+        try:
+            response = requests.post(
+            "http://127.0.0.1:8000/analyze/",
+            json={"query": text},
+            timeout=15
+        )
+
+            data = response.json()
+            ai_html = f"""
+<b>🧠 AI Co-Pilot</b><br><br>
+
+<b>🟡 Summary</b><br>
+{data.get("summary", "")}<br><br>
+
+<b>🔍 Details</b><br>
+{data.get("details", "")}<br><br>
+
+<b>❓ Uncertainty</b><br>
+{data.get("uncertainty", "")}<br><br>
+
+<hr>
+"""
+            self.chat.append(ai_html)
+        
+        except Exception as e:
+            self.chat.append(
+            f"<span style='color:red;'>Backend error: {str(e)}</span>"
+        )
+
 
     def handle_link_click(self, url: QUrl):
         question = url.toString()
