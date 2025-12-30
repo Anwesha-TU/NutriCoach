@@ -187,10 +187,12 @@ class IngredientCopilot(QMainWindow):
         if not text:
             return
 
-       # self.remaining_suggestions = self.all_suggestions.copy()
+    # ✅ reset suggestions for new product
+        self.remaining_suggestions = self.all_suggestions.copy()
 
         self.chat.append(f"<b>You:</b> {text}")
         self.input_box.clear()
+
         try:
             response = requests.post(
             "http://127.0.0.1:8000/analyze/",
@@ -199,6 +201,10 @@ class IngredientCopilot(QMainWindow):
         )
 
             data = response.json()
+
+        # ✅ render follow-up buttons
+            buttons_html = self.render_suggestion_links()
+
             ai_html = f"""
 <b>🧠 AI Co-Pilot</b><br><br>
 
@@ -211,10 +217,12 @@ class IngredientCopilot(QMainWindow):
 <b>❓ Uncertainty</b><br>
 {data.get("uncertainty", "")}<br><br>
 
+{buttons_html}
+
 <hr>
 """
             self.chat.append(ai_html)
-        
+
         except Exception as e:
             self.chat.append(
             f"<span style='color:red;'>Backend error: {str(e)}</span>"
