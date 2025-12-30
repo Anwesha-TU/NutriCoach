@@ -2,14 +2,15 @@ import json
 import os
 import numpy as np
 from sentence_transformers import SentenceTransformer
-from google import genai
+import google.generativeai as genai
 
 
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 BASE_DIR = os.path.dirname(__file__)
 EMBEDDINGS_PATH = os.path.join(BASE_DIR, "embeddings.json")
 
 model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
-client = genai.Client()  # uses GEMINI_API_KEY from environment
+# client = genai.Client()  # uses GEMINI_API_KEY from environment
 
 
 with open(EMBEDDINGS_PATH, "r", encoding="utf-8") as f:
@@ -44,6 +45,7 @@ def build_context(retrieved):
 
 
 def run_model(user_query):
+    # model = genai.GenerativeModel("gemini-2.5-flash")
     retrieved = retrieve(user_query, INGREDIENTS, k=3)
 
     if not retrieved:
@@ -76,11 +78,8 @@ Summary:
 Details:
 Uncertainty:
 """
-
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt
-    )
+    model = genai.GenerativeModel("gemini-1.5-flash")
+    response = model.generate_content(prompt)
 
     text = response.text.strip()
 

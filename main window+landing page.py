@@ -221,13 +221,55 @@ class IngredientCopilot(QMainWindow):
         )
 
 
+    # def handle_link_click(self, url: QUrl):
+    #     question = url.toString()
+    #     if question in self.remaining_suggestions:
+    #         self.remaining_suggestions.remove(question)
+
+    #     self.chat.append(f"<b>You:</b> {question}")
+    #     self.chat.append(self.generate_ai_response())
     def handle_link_click(self, url: QUrl):
         question = url.toString()
+
         if question in self.remaining_suggestions:
             self.remaining_suggestions.remove(question)
 
         self.chat.append(f"<b>You:</b> {question}")
-        self.chat.append(self.generate_ai_response())
+
+        try:
+            response = requests.post(
+            "http://127.0.0.1:8000/analyze/",
+            json={"query": question},
+            timeout=15
+        )
+
+            data = response.json()
+
+            buttons_html = self.render_suggestion_links()
+
+            ai_html = f"""
+    <b>🧠 AI Co-Pilot</b><br><br>
+
+    <b>🟡 Summary</b><br>
+    {data.get("summary", "")}<br><br>
+
+    <b>🔍 Details</b><br>
+    {data.get("details", "")}<br><br>
+
+    <b>❓ Uncertainty</b><br>
+    {data.get("uncertainty", "")}<br><br>
+
+    {buttons_html}
+
+    <hr>
+    """
+            self.chat.append(ai_html)
+
+        except Exception as e:
+            self.chat.append(
+            f"<span style='color:red;'>Backend error: {str(e)}</span>"
+        )
+
 
     def render_suggestion_links(self):
         if not self.remaining_suggestions:
@@ -245,28 +287,28 @@ class IngredientCopilot(QMainWindow):
 
     # Output from model
 
-    def generate_ai_response(self):
-        buttons_html = self.render_suggestion_links()
+#     def generate_ai_response(self):
+#         buttons_html = self.render_suggestion_links()
 
-        return f"""
-<b>🧠 AI Co-Pilot</b><br><br>
+#         return f"""
+# <b>🧠 AI Co-Pilot</b><br><br>
 
-<b>🟡 Overall impression</b><br>
-This product is convenient but moderately processed.<br><br>
+# <b>🟡 Overall impression</b><br>
+# This product is convenient but moderately processed.<br><br>
 
-<b>🔍 Why this matters</b><br>
-Some ingredients may impact long-term health if consumed frequently.<br><br>
+# <b>🔍 Why this matters</b><br>
+# Some ingredients may impact long-term health if consumed frequently.<br><br>
 
-<b>⚖️ Trade-offs</b><br>
-Long shelf life and taste consistency, but lower nutritional density.<br><br>
+# <b>⚖️ Trade-offs</b><br>
+# Long shelf life and taste consistency, but lower nutritional density.<br><br>
 
-<b>❓ Uncertainty</b><br>
-Terms like <i>“natural flavors”</i> are vague and not fully disclosed.<br><br>
+# <b>❓ Uncertainty</b><br>
+# Terms like <i>“natural flavors”</i> are vague and not fully disclosed.<br><br>
 
-{buttons_html}
+# {buttons_html}
 
-<hr>
-"""
+# <hr>
+# """
 
 
 if __name__ == "__main__":

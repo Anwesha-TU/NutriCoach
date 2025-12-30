@@ -2,38 +2,42 @@ from django.shortcuts import render
 
 # Create your views here.
 import json
+import traceback
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
 
 from model.rag_service import run_model
 
 
 @csrf_exempt
-@require_POST
 def analyze_ingredients(request):
-    """
-    API endpoint for ingredient analysis
-    """
+    if request.method != "POST":
+        return JsonResponse(
+            {"error": "Only POST requests are allowed"},
+            status=405
+        )
+
     try:
-        body = json.loads(request.body.decode("utf-8"))
-        user_query = body.get("query", "").strip()
+        body = json.loads(request.body)
+        query = body.get("query", "").strip()
+        print("🔍 Received query:", query)
+        result=run_model(query)
+        print ("Model Result: ", result)
 
-        if not user_query:
-            return JsonResponse(
-                {"error": "Query is required"},
-                status=400
-            )
+        # if not query:
+        #     return JsonResponse(
+        #         {"error": "Query is required"},
+        #         status=400
+        #     )
 
-        result = run_model(user_query)
+        # result = run_model(query)
 
-        return JsonResponse({
-            "summary": result["summary"],
-            "details": result["details"],
-            "uncertainty": result["uncertainty"]
-        })
+        return JsonResponse(result)
 
     except Exception as e:
+        print("ERROR IN analyze_ingredients")
+        traceback.print_exc()
+        
         return JsonResponse(
             {"error": str(e)},
             status=500
