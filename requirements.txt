@@ -1,0 +1,5 @@
+django
+sentence-transformers
+numpy
+requests
+google-generativeai

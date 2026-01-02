@@ -1,8 +1,12 @@
 import json
 import os
-import numpy as np
-from sentence_transformers import SentenceTransformer
+
 import google.generativeai as genai
+import numpy as np
+from dotenv import load_dotenv
+from sentence_transformers import SentenceTransformer
+
+load_dotenv()
 
 
 genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
@@ -25,6 +29,7 @@ def cosine_similarity(a, b):
         return 0.0
     return dot_prod / (norm_a * norm_b)
 
+
 def retrieve(query, ingredients, k=3):
     query_emb = model.encode(query)
     scores = []
@@ -34,6 +39,7 @@ def retrieve(query, ingredients, k=3):
     scores.sort(reverse=True, key=lambda x: x[0])
     return [ing for _, ing in scores[:k]]
 
+
 def build_context(retrieved):
     return "\n".join(
         f"{r['name']} → {r['evidence_strength']} evidence; "
@@ -41,18 +47,26 @@ def build_context(retrieved):
         for r in retrieved
     )
 
-#Main entry
 
+# Main entry
+def run_model(query, parent_query=None):
+    retrieval_query = parent_query if parent_query else query
 
-def run_model(user_query):
-    # model = genai.GenerativeModel("gemini-2.5-flash")
-    retrieved = retrieve(user_query, INGREDIENTS, k=3)
+    if not retrieval_query:
+        return {
+            "summary": "There is very limited information available for these ingredients.",
+            "details": "The ingredient label does not provide enough evidence-backed insights.",
+            "uncertainty": "Effects may vary depending on formulation and consumption frequency.",
+        }
+
+    # 🔑 FIX: retrieve ingredients properly
+    retrieved = retrieve(retrieval_query, INGREDIENTS, k=3)
 
     if not retrieved:
         return {
             "summary": "There is very limited information available for these ingredients.",
             "details": "The ingredient label does not provide enough evidence-backed insights.",
-            "uncertainty": "Effects may vary depending on formulation and consumption frequency."
+            "uncertainty": "Effects may vary depending on formulation and consumption frequency.",
         }
 
     context = build_context(retrieved)
@@ -78,6 +92,7 @@ Summary:
 Details:
 Uncertainty:
 """
+
     model = genai.GenerativeModel("gemini-2.5-flash")
     response = model.generate_content(prompt)
 

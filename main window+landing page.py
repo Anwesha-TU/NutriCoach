@@ -1,6 +1,6 @@
 import sys
-import requests
 
+import requests
 from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtWidgets import (
     QApplication,
@@ -92,6 +92,9 @@ class IngredientCopilot(QMainWindow):
         self.stack.addWidget(self.landing_page)  # index 0
         self.stack.addWidget(self.copilot_page)  # index 1
         self.set_theme("light")
+
+        self.current_context = None
+        self.current_query = None
 
     def build_landing_page(self):
         page = QWidget()
@@ -187,7 +190,7 @@ class IngredientCopilot(QMainWindow):
         if not text:
             return
 
-    # ✅ reset suggestions for new product
+        # ✅ reset suggestions for new product
         self.remaining_suggestions = self.all_suggestions.copy()
 
         self.chat.append(f"<b>You:</b> {text}")
@@ -195,15 +198,16 @@ class IngredientCopilot(QMainWindow):
 
         try:
             response = requests.post(
-            "http://127.0.0.1:8000/analyze/",
-            json={"query": text},
-            timeout=15
-        )
+                "http://127.0.0.1:8000/analyze/", json={"query": text}, timeout=15
+            )
 
             data = response.json()
 
-        # ✅ render follow-up buttons
+            # ✅ render follow-up buttons
             buttons_html = self.render_suggestion_links()
+
+            self.current_query = text
+            self.current_context = {"last_query": text}
 
             ai_html = f"""
 <b>🧠 AI Co-Pilot</b><br><br>
@@ -224,10 +228,7 @@ class IngredientCopilot(QMainWindow):
             self.chat.append(ai_html)
 
         except Exception as e:
-            self.chat.append(
-            f"<span style='color:red;'>Backend error: {str(e)}</span>"
-        )
-
+            self.chat.append(f"<span style='color:red;'>Backend error: {str(e)}</span>")
 
     # def handle_link_click(self, url: QUrl):
     #     question = url.toString()
@@ -239,6 +240,8 @@ class IngredientCopilot(QMainWindow):
     def handle_link_click(self, url: QUrl):
         question = url.toString()
 
+        payload = {"query": question, "parent_query": self.current_query}
+
         if question in self.remaining_suggestions:
             self.remaining_suggestions.remove(question)
 
@@ -246,10 +249,8 @@ class IngredientCopilot(QMainWindow):
 
         try:
             response = requests.post(
-            "http://127.0.0.1:8000/analyze/",
-            json={"query": question},
-            timeout=15
-        )
+                "http://127.0.0.1:8000/analyze/", json=payload, timeout=15
+            )
 
             data = response.json()
 
@@ -274,10 +275,7 @@ class IngredientCopilot(QMainWindow):
             self.chat.append(ai_html)
 
         except Exception as e:
-            self.chat.append(
-            f"<span style='color:red;'>Backend error: {str(e)}</span>"
-        )
-
+            self.chat.append(f"<span style='color:red;'>Backend error: {str(e)}</span>")
 
     def render_suggestion_links(self):
         if not self.remaining_suggestions:
@@ -294,6 +292,7 @@ class IngredientCopilot(QMainWindow):
         return "&nbsp;&nbsp;&nbsp;".join(links)
 
     # Output from model
+
 
 #     def generate_ai_response(self):
 #         buttons_html = self.render_suggestion_links()
