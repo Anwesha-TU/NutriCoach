@@ -14,7 +14,6 @@ BASE_DIR = os.path.dirname(__file__)
 EMBEDDINGS_PATH = os.path.join(BASE_DIR, "embeddings.json")
 
 model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
-# client = genai.Client()  # uses GEMINI_API_KEY from environment
 
 
 with open(EMBEDDINGS_PATH, "r", encoding="utf-8") as f:
@@ -59,7 +58,6 @@ def run_model(query, parent_query=None):
             "uncertainty": "Effects may vary depending on formulation and consumption frequency.",
         }
 
-    # 🔑 FIX: retrieve ingredients properly
     retrieved = retrieve(retrieval_query, INGREDIENTS, k=3)
 
     if not retrieved:

@@ -21,14 +21,6 @@ def analyze_ingredients(request):
         result = run_model(query=query, parent_query=parent_query)
         print("Model Result: ", result)
 
-        # if not query:
-        #     return JsonResponse(
-        #         {"error": "Query is required"},
-        #         status=400
-        #     )
-
-        # result = run_model(query)
-
         return JsonResponse(result)
 
     except Exception as e:
