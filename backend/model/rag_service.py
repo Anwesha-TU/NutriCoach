@@ -5,21 +5,35 @@ import google.generativeai as genai
 import numpy as np
 from dotenv import load_dotenv
 from sentence_transformers import SentenceTransformer
+from google.api_core.exceptions import ResourceExhausted
 
+# ----------------------------
+# ENV + CONFIG
+# ----------------------------
 load_dotenv()
 
+API_KEY = os.getenv("GOOGLE_API_KEY")
+if not API_KEY:
+    raise RuntimeError("GOOGLE_API_KEY not found in environment")
 
-genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+genai.configure(api_key=API_KEY)
+
 BASE_DIR = os.path.dirname(__file__)
 EMBEDDINGS_PATH = os.path.join(BASE_DIR, "embeddings.json")
 
-model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+GEMINI_MODEL = "models/gemini-2.5-flash"
 
+# ----------------------------
+# LOAD MODELS + DATA
+# ----------------------------
+embedder = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 
 with open(EMBEDDINGS_PATH, "r", encoding="utf-8") as f:
     INGREDIENTS = json.load(f)
 
-
+# ----------------------------
+# VECTOR SEARCH UTILS
+# ----------------------------
 def cosine_similarity(a, b):
     dot_prod = np.dot(a, b)
     norm_a = np.linalg.norm(a)
@@ -30,12 +44,12 @@ def cosine_similarity(a, b):
 
 
 def retrieve(query, ingredients, k=3):
-    query_emb = model.encode(query)
+    query_emb = embedder.encode(query)
     scores = []
     for ing in ingredients:
         score = cosine_similarity(query_emb, np.array(ing["embedding"]))
         scores.append((score, ing))
-    scores.sort(reverse=True, key=lambda x: x[0])
+    scores.sort(key=lambda x: x[0], reverse=True)
     return [ing for _, ing in scores[:k]]
 
 
@@ -46,10 +60,11 @@ def build_context(retrieved):
         for r in retrieved
     )
 
-
-# Main entry
-def run_model(query, parent_query=None):
-    retrieval_query = parent_query if parent_query else query
+# ----------------------------
+# MAIN ENTRY (CALLED BY DJANGO)
+# ----------------------------
+def run_model(query: str, parent_query: str | None = None):
+    retrieval_query = parent_query or query
 
     if not retrieval_query:
         return {
@@ -91,11 +106,28 @@ Details:
 Uncertainty:
 """
 
-    model = genai.GenerativeModel("gemini-2.5-flash")
-    response = model.generate_content(prompt)
+    try:
+        model = genai.GenerativeModel(GEMINI_MODEL)
+        response = model.generate_content(prompt)
+        text = response.text.strip()
 
-    text = response.text.strip()
+    except ResourceExhausted:
+        return {
+            "summary": "Usage limit reached.",
+            "details": "The AI service is temporarily busy. Please retry in a few seconds.",
+            "uncertainty": "Rate limits vary depending on usage and model availability.",
+        }
 
+    except Exception as e:
+        return {
+            "summary": "An unexpected error occurred.",
+            "details": str(e),
+            "uncertainty": "The response could not be generated reliably.",
+        }
+
+    # ----------------------------
+    # PARSE STRUCTURED RESPONSE
+    # ----------------------------
     sections = {"summary": "", "details": "", "uncertainty": ""}
     current = None
 
