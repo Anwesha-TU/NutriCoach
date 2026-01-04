@@ -65,6 +65,7 @@ def build_context(retrieved):
 # ----------------------------
 def run_model(query: str, parent_query: str | None = None):
     retrieval_query = parent_query or query
+    answer_query=query
 
     if not retrieval_query:
         return {
@@ -86,6 +87,12 @@ def run_model(query: str, parent_query: str | None = None):
 
     prompt = f"""
 You are an expert AI health co-pilot helping consumers make sense of food ingredients.
+
+Ingredient context:
+{context}
+
+User question:
+"{query}"
 
 Rules:
 - Do not make absolute disease claims
