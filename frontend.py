@@ -215,7 +215,7 @@ class IngredientCopilot(QMainWindow):
     # reset suggestions for a new query
         self.remaining_suggestions = self.all_suggestions.copy()
         payload = {
-        "query": typed_text or "Analyze this ingredient",
+        "query": typed_text or "Analyze this ingredient" or "analyze this ingredient" or "analyze" or "explain",
         "image_path": self.attached_image_path,}
         # self.current_query = typed_text
         self.chat.append(f"<b>You:</b> {typed_text or '[Image Uploaded]'}")
