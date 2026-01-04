@@ -95,6 +95,8 @@ class IngredientCopilot(QMainWindow):
 
         self.current_context = None
         self.current_query = None
+        self.attached_file = None
+
 
     def build_landing_page(self):
         page = QWidget()
@@ -177,13 +179,77 @@ class IngredientCopilot(QMainWindow):
 
     def attach_file(self):
         file_path, _ = QFileDialog.getOpenFileName(
-            self,
-            "Attach nutrient label",
-            "",
-            "Images (*.png *.jpg *.jpeg);;PDF (*.pdf)",
-        )
+        self,
+        "Attach ingredient label",
+        "",
+        "Text (*.txt);;PDF (*.pdf);;Images (*.png *.jpg *.jpeg)",
+    )
+
         if file_path:
+            self.attached_file = file_path
             self.chat.append(f"📎 <i>Attached:</i> {file_path}")
+
+    def read_attached_file(self):
+        if not self.attached_file:
+            return ""
+
+        try:
+            if self.attached_file.lower().endswith(".txt"):
+                with open(self.attached_file, "r", encoding="utf-8") as f:
+                    return f.read()
+
+        # placeholder for PDFs / images (OCR later)
+            return ""
+
+        except Exception:
+            return ""
+
+
+    def handle_input(self):
+        typed_text = self.input_box.toPlainText().strip()
+        file_text = self.read_attached_file()
+        if not typed_text and not file_text:
+            return
+
+    # reset suggestions for a new query
+        self.remaining_suggestions = self.all_suggestions.copy()
+        self.current_query = text
+
+        self.chat.append(f"<b>You:</b> {text}")
+        self.input_box.clear()
+
+        try:
+            response = requests.post(
+            "http://127.0.0.1:8000/analyze/",
+            json={"query": text, "label_text": file_text},
+            timeout=15
+        )
+
+            data = response.json()
+            buttons_html = self.render_suggestion_links()
+
+            ai_html = f"""
+<b>🧠 AI Co-Pilot</b><br><br>
+
+<b>🟡 Summary</b><br>
+{data.get("summary", "")}<br><br>
+
+<b>🔍 Details</b><br>
+{data.get("details", "")}<br><br>
+
+<b>❓ Uncertainty</b><br>
+{data.get("uncertainty", "")}<br><br>
+
+{buttons_html}
+<hr>
+"""
+            self.chat.append(ai_html)
+
+        except Exception as e:
+            self.chat.append(
+            f"<span style='color:red;'>Backend error: {str(e)}</span>"
+        )
+
 
     def handle_link_click(self, url: QUrl):
         question = url.toString()
