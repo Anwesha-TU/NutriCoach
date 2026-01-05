@@ -39,6 +39,7 @@ A Desktop Co-Pilot application which focuses on providing and explaining ingredi
 ## Architecture Overview
 - Frontend: PyQt5 desktop application, handling user input, file uploads, and UI rendering
 - Backend: Django REST API, Ingredient retrieval using embeddings, Gemini model for natural language explanation
+- 
   Frontend (PyQt5)
    ↓ HTTP
   Backend (Django API)
