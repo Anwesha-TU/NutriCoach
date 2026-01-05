@@ -102,5 +102,5 @@ Image OCR quality depends on label clarity
 Our tool is not a medical diagnostic tool, and the application provides educational insights only and does not replace professional medical or dietary advice.
 
 ## Contributors:
-Anwesha Chakraborty
-Koustav Chatterjee
+- Anwesha Chakraborty
+- Koustav Chatterjee
