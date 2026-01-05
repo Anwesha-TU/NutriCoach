@@ -1,5 +1,6 @@
-django
+Django
+gunicorn
+whitenoise
 sentence-transformers
 numpy
-requests
 google-generativeai
