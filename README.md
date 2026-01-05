@@ -58,33 +58,33 @@ A Desktop Co-Pilot application which focuses on providing and explaining ingredi
 
 ## 🛠️ Installation & Setup (WINDOWS)
 1️ Clone the repository:
-git clone https://github.com/Anwesha-TU/NutriCoach.git
-cd NutriCoach
+- git clone https://github.com/Anwesha-TU/NutriCoach.git
+- cd NutriCoach
 
 2️ Create virtual environment:
-python -m venv venv
-venv\Scripts\activate
+- python -m venv venv
+- venv\Scripts\activate
 
 3️ Install dependencies:
-pip install -r requirements.txt
+- pip install -r requirements.txt
 
 4 OCR Support: 
-Install Tesseract OCR (Windows)
-Add path in code:
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+- Install Tesseract OCR (Windows)
+- Add path in code:
+- pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 5 Set environment variable:
-Create a .env file in the backend folder:
+- Create a .env file in the backend folder:
 GEMINI_API_KEY=your_api_key_here
 
 6 Run Backend Server:
-cd backend
-python manage.py runserver
+- cd backend
+- python manage.py runserver
 
 7 Run Frontend: 
-python frontend.py
-OR
-Run the application from dist/frontend.exe
+- python frontend.py
+## OR
+- Run the application from dist/frontend.exe
 
 ## Model Building and Workflow
 
