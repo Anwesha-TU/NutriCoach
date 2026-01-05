@@ -84,7 +84,8 @@ GEMINI_API_KEY=your_api_key_here
 7 Run Frontend: 
 - python frontend.py
 ### OR
-- Run the application from dist/frontend.exe
+- Run the application from https://github.com/Anwesha-TU/NutriCoach/releases
+
 
 ## Model Building and Workflow
 
