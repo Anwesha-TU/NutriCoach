@@ -83,7 +83,7 @@ GEMINI_API_KEY=your_api_key_here
 
 7 Run Frontend: 
 - python frontend.py
-## OR
+### OR
 - Run the application from dist/frontend.exe
 
 ## Model Building and Workflow
