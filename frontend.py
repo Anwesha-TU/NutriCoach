@@ -1,5 +1,9 @@
 import sys
 import requests
+# import subprocess
+# import time
+# import os
+
 
 from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtWidgets import (
@@ -70,6 +74,7 @@ QPushButton:hover {
 class IngredientCopilot(QMainWindow):
     def __init__(self):
         super().__init__()
+        # self.start_backend()
         self.setWindowTitle("NutriCoach")
         self.resize(900, 650)
 
@@ -98,6 +103,27 @@ class IngredientCopilot(QMainWindow):
         self.stack.addWidget(self.copilot_page)
 
         self.set_theme("light")
+
+    # def start_backend(self):
+    #     if getattr(sys, "frozen", False):
+    #         base_dir = sys._MEIPASS
+    #     else:
+    #         base_dir = os.path.dirname(os.path.abspath(__file__))
+
+    #     backend_dir = os.path.join(base_dir, "backend")
+
+    #     try:
+    #         subprocess.Popen(
+    #         [sys.executable, "manage.py", "runserver", "127.0.0.1:8000"],
+    #         cwd=backend_dir,
+    #         stdout=subprocess.DEVNULL,
+    #         stderr=subprocess.DEVNULL,
+    #     )
+    #         time.sleep(4)
+    #     except Exception as e:
+    #         print("Backend start failed:", e)
+
+
 
     def build_landing_page(self):
         page = QWidget()
