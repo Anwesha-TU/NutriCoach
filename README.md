@@ -95,8 +95,8 @@ GEMINI_API_KEY=your_api_key_here
 -   `Generation`: Then, the generative model replies using the context, and if there is no context, then the model will say so without hallucinating.
 
 ## Limitations
-Gemini Free-Tier has daily- request limits
-Image OCR quality depends on label clarity
+- Gemini Free-Tier has daily- request limits
+- Image OCR quality depends on label clarity
 
 ## Warnings
 Our tool is not a medical diagnostic tool, and the application provides educational insights only and does not replace professional medical or dietary advice.
